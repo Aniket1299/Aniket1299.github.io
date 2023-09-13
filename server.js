@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 
 
 // Endpoint to store or update user details
-app.post('https://github.com/Aniket1299/Aniket1299.github.io/api/storeUserDetails', (req, res) => {
+app.post('https://aniket1299.github.io/api/storeUserDetails', (req, res) => {
     const { firstName, lastName } = req.body;
 
     // Update the user data in the users array
@@ -36,7 +36,7 @@ app.post('https://github.com/Aniket1299/Aniket1299.github.io/api/storeUserDetail
 });
 
 // Endpoint to retrieve user details via API
-app.get('https://github.com/Aniket1299/Aniket1299.github.io/api/getUserDetails', (req, res) => {
+app.get('https://aniket1299.github.io/api/getUserDetails', (req, res) => {
     // Retrieve user data from the JSON file
     const userData = retrieveUserDataFromJson();
     if (userData.length === 0) {
