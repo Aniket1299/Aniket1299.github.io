@@ -3,44 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Details</title>
+    <title>Update User Data</title>
 </head>
 <body>
-    <h1>User Details</h1>
+    <h1>Update User Data</h1>
     <form id="userForm">
         <label for="firstName">First Name:</label>
         <input type="text" id="firstName" name="firstName" required><br><br>
-        
+
         <label for="lastName">Last Name:</label>
         <input type="text" id="lastName" name="lastName" required><br><br>
-        
-        <input type="submit" value="Submit">
+
+        <label for="birthdate">Birthdate:</label>
+        <input type="date" id="birthdate" name="birthdate"><br><br>
+
+        <button type="submit">Update User Data</button>
     </form>
 
-    <script>
-        document.getElementById("userForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            const firstName = document.getElementById("firstName").value;
-            const lastName = document.getElementById("lastName").value;
+    <div id="message"></div>
 
-            // Send data to the server
-            fetch("https://anikettestapi.onrender.com/api/storeUserDetails", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ firstName, lastName })
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Handle the response from the server
-                console.log(data);
-                alert("User details submitted successfully!");
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                alert("An error occurred while submitting user details.");
-            });
+    <script>
+        const userForm = document.getElementById('userForm');
+        const messageDiv = document.getElementById('message');
+
+        userForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const birthdate = document.getElementById('birthdate').value;
+
+            try {
+                const response = await fetch('https://api.npoint.io/5de6f142cc0d1aad897b', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ firstName, lastName, birthdate }),
+                });
+
+                if (response.ok) {
+                    messageDiv.textContent = 'User details successfully updated';
+                } else {
+                    messageDiv.textContent = 'Error updating user details';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                messageDiv.textContent = 'An error occurred while updating user details';
+            }
         });
     </script>
 </body>
