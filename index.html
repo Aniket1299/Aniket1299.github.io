@@ -24,7 +24,7 @@
             const lastName = document.getElementById("lastName").value;
 
             // Send data to the server
-            fetch("https://aniket1299.github.io/api/storeUserDetails", {
+            fetch("/api/storeUserDetails", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
